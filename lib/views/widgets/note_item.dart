@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:note/views/edit_note_view.dart';
 
 class NoteItem extends StatelessWidget {
   @override
@@ -12,6 +13,14 @@ class NoteItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ListTile(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditNoteView(),
+                  ),
+                );
+              },
               contentPadding: EdgeInsets.all(5),
               title: Text(
                 "Title",
