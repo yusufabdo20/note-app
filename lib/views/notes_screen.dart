@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:note/views/widgets/AddNoteBottomSheet.dart';
 import 'package:note/views/widgets/notes_view_body.dart';
 
 class NotesScreen extends StatelessWidget {
@@ -11,6 +12,8 @@ class NotesScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
               context: context,
               builder: (context) {
                 return AddNoteBottomSheet();
@@ -22,23 +25,6 @@ class NotesScreen extends StatelessWidget {
       ),
       body: const SafeArea(
         child: NotesViewBody(),
-      ),
-    );
-  }
-}
-
-class AddNoteBottomSheet extends StatelessWidget {
-  const AddNoteBottomSheet({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      child: Column(
-        children: [
-          TextField(),
-          TextField(),
-        ],
       ),
     );
   }
