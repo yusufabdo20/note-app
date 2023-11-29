@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NoteItem extends StatelessWidget {
   @override
@@ -15,13 +16,14 @@ class NoteItem extends StatelessWidget {
               title: Text(
                 "Title",
                 style: TextStyle(
+                  fontSize: 20.sp,
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(
                 "Sub Title",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(fontSize: 16.sp, color: Colors.black),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),

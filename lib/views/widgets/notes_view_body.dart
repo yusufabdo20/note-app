@@ -6,7 +6,7 @@ import 'package:note/views/widgets/notesListViewBuilder.dart';
 
 class NotesViewBody extends StatelessWidget {
   const NotesViewBody({super.key});
-
+  final colors = const [];
   @override
   Widget build(BuildContext context) {
     return Padding(
