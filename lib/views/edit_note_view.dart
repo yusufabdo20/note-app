@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:note/views/widgets/AddNoteBottomSheet.dart';
+import 'package:note/views/widgets/add_note_bottomSheet.dart';
 import 'package:note/views/widgets/cuustom_app_bar.dart';
 
 class EditNoteView extends StatelessWidget {
@@ -33,6 +33,7 @@ class EditNoteBody extends StatelessWidget {
           CustomTextField(
             labelText: 'Title',
             controller: titleController,
+            hintText: "Hello Iam Title",
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
@@ -41,6 +42,7 @@ class EditNoteBody extends StatelessWidget {
             labelText: 'Details',
             controller: detailsController,
             maxLines: 6,
+            hintText: "Hello Iam Details",
           ),
         ],
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:note/views/widgets/AddNoteBottomSheet.dart';
+import 'package:note/views/widgets/add_note_bottomSheet.dart';
 import 'package:note/views/widgets/notes_view_body.dart';
 
 class NotesScreen extends StatelessWidget {
