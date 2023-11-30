@@ -1,8 +1,9 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 part 'edit_note_state.dart';
 
 class EditNoteCubit extends Cubit<EditNoteState> {
-  EditNoteCubit() : super(EditNoteInitial());
+  EditNoteCubit() : super(EditNoteInitialState());
+  static EditNoteCubit get(context) => BlocProvider.of(context);
 }

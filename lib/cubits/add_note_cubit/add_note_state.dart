@@ -11,3 +11,5 @@ class AddNoteErrorState extends NoteStates {
 }
 
 class AddNoteSuccessState extends NoteStates {}
+
+class AddNoteLoadState extends NoteStates {}
