@@ -14,8 +14,8 @@ class EditNoteView extends StatelessWidget {
 }
 
 class EditNoteBody extends StatelessWidget {
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController detailsController = TextEditingController();
+  final TextEditingController editTitleController = TextEditingController();
+  final TextEditingController editDetailsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class EditNoteBody extends StatelessWidget {
           ),
           CustomTextField(
             labelText: 'Title',
-            controller: titleController,
+            controller: editTitleController,
             hintText: "Hello Iam Title",
           ),
           SizedBox(
@@ -40,7 +40,7 @@ class EditNoteBody extends StatelessWidget {
           ),
           CustomTextField(
             labelText: 'Details',
-            controller: detailsController,
+            controller: editDetailsController,
             maxLines: 6,
             hintText: "Hello Iam Details",
           ),
