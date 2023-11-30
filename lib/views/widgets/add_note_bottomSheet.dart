@@ -2,25 +2,54 @@ import 'package:flutter/material.dart';
 
 class AddNoteBottomSheet extends StatelessWidget {
   AddNoteBottomSheet({super.key});
-  final TextEditingController editTitleController = TextEditingController();
-  final TextEditingController editDetailsController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20),
+      child: AddNoteForm(),
+    );
+  }
+}
+
+class AddNoteForm extends StatefulWidget {
+  const AddNoteForm({
+    super.key,
+  });
+
+  @override
+  State<AddNoteForm> createState() => _AddNoteFormState();
+}
+
+class _AddNoteFormState extends State<AddNoteForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  TextEditingController titleController = TextEditingController();
+  TextEditingController detailsController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      autovalidateMode: autovalidateMode,
       child: Column(
         children: [
           CustomTextField(
             labelText: 'Title',
-            controller: editTitleController,
+            controller: titleController,
+            onSaved: (v) {
+              titleController.text = v!;
+            },
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
           ),
           CustomTextField(
             labelText: 'Details',
-            controller: editDetailsController,
+            controller: detailsController,
             maxLines: 6,
+            onSaved: (v) {
+              detailsController.text = v!;
+            },
           ),
           Spacer(),
           Container(
@@ -29,7 +58,14 @@ class AddNoteBottomSheet extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepPurple,
               ),
-              onPressed: () {},
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                } else {
+                  autovalidateMode = AutovalidateMode.always;
+                  setState(() {});
+                }
+              },
               child: Text("Add"),
             ),
           ),
@@ -46,15 +82,25 @@ class CustomTextField extends StatelessWidget {
       this.onSubmitted,
       this.maxLines = 1,
       this.hintText,
-      this.controller});
+      this.controller,
+      this.onSaved});
   final int maxLines;
   final String labelText;
   final String? hintText;
   final TextEditingController? controller;
   final Function(String)? onSubmitted;
+  final Function(String?)? onSaved;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      onSaved: onSaved,
+      validator: (value) {
+        if (value?.isEmpty ?? true) {
+          return 'Field is Required';
+        } else {
+          return null;
+        }
+      },
       controller: controller,
       decoration: InputDecoration(
         labelText: labelText,
@@ -64,7 +110,7 @@ class CustomTextField extends StatelessWidget {
       ),
       maxLines: maxLines,
       textAlign: TextAlign.center,
-      onSubmitted: onSubmitted,
+      onFieldSubmitted: onSubmitted,
     );
   }
 }
