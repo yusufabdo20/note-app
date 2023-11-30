@@ -1,15 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-sealed class NoteStates {}
+sealed class AddNoteStates {}
 
-class NoteInitioalState extends NoteStates {}
+class NoteInitioalState extends AddNoteStates {}
 
-class AddNoteErrorState extends NoteStates {
+class AddNoteErrorState extends AddNoteStates {
   String error;
   AddNoteErrorState({
     required this.error,
   });
 }
 
-class AddNoteSuccessState extends NoteStates {}
+class AddNoteSuccessState extends AddNoteStates {}
 
-class AddNoteLoadState extends NoteStates {}
+class AddNoteLoadState extends AddNoteStates {}

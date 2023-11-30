@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:note/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:note/models/note_model.dart';
 import 'package:note/views/notes_view.dart';
 
@@ -22,12 +25,19 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData.dark(
-              useMaterial3: true,
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => AddNoteCubit(),
+              ),
+            ],
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData.dark(
+                useMaterial3: true,
+              ),
+              home: const NotesScreen(),
             ),
-            home: const NotesScreen(),
           );
         });
   }
