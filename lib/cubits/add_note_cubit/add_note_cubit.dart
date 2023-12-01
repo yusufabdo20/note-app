@@ -29,28 +29,4 @@ class AddNoteCubit extends Cubit<AddNoteStates> {
       );
     }
   }
-
-  readNotes() async {
-    emit(
-      ReadNoteLoadState(),
-    );
-
-    try {
-      var noteBox = Hive.box<NoteModel>(knoteBox);
-      List<NoteModel> notes = [];
-      for (int i = 0; i < noteBox.length; i++) {
-        NoteModel? noteModel = noteBox.getAt(i);
-        notes.add(noteModel!);
-      }
-      emit(
-        ReadNoteSuccessState(notes: notes),
-      );
-      return notes;
-    } catch (e) {
-      print(e);
-      emit(
-        ReadNoteErrorState(error: e.toString()),
-      );
-    }
-  }
 }

@@ -16,27 +16,34 @@ class AddNoteBottomSheet extends StatelessWidget {
     return BlocProvider(
       create: (context) => AddNoteCubit(),
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: BlocConsumer<AddNoteCubit, AddNoteStates>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state is AddNoteErrorState) {
               log("ERRORR : ${state.error}");
-              // Fluttertoast.showToast(
-              //     msg: "There is Error: ${state.error}",
-              //     toastLength: Toast.LENGTH_LONG,
-              //     gravity: ToastGravity.CENTER,
-              //     backgroundColor: Colors.red,
-              //     textColor: Colors.white,
-              //     fontSize: 16.0);
+              await Fluttertoast.showToast(
+                  msg: "There is Error: ${state.error}",
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
             }
             if (state is AddNoteSuccessState) {
+              await Fluttertoast.showToast(
+                  msg: "Added New Note",
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  // backgroundColor: Colors.,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
               Navigator.pop(context);
             }
           },
           builder: (context, state) {
-            return ModalProgressHUD(
-              inAsyncCall: state is AddNoteLoadState ? true : false,
-              child: AddNoteForm(),
+            return AbsorbPointer(
+              absorbing: state is AddNoteLoadState ? true : false,
+              child: const AddNoteForm(),
             );
           },
         ),

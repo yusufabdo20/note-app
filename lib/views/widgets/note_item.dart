@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:note/models/note_model.dart';
 import 'package:note/views/edit_note_view.dart';
 
 class NoteItem extends StatelessWidget {
+  final NoteModel noteModel;
+
+  const NoteItem({super.key, required this.noteModel});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,7 +27,7 @@ class NoteItem extends StatelessWidget {
               },
               contentPadding: EdgeInsets.all(5),
               title: Text(
-                "Title",
+                noteModel.title,
                 style: TextStyle(
                   fontSize: 20.sp,
                   color: Colors.black,
@@ -31,7 +35,7 @@ class NoteItem extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                "Sub Title",
+                noteModel.details,
                 style: TextStyle(fontSize: 16.sp, color: Colors.black),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -41,9 +45,9 @@ class NoteItem extends StatelessWidget {
                 icon: const Icon(Icons.delete, color: Colors.black),
               ),
             ),
-            const Text(
-              "May 21 , 2023",
-              style: TextStyle(
+            Text(
+              noteModel.dateTime,
+              style: const TextStyle(
                 height: 2.5,
                 color: Colors.black,
               ),
