@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:note/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:note/models/note_model.dart';
 import 'package:note/views/widgets/custom_text_form_field.dart';
 
 class AddNoteForm extends StatefulWidget {
@@ -51,6 +53,13 @@ class _AddNoteFormState extends State<AddNoteForm> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
+                  var nosteModel = NoteModel(
+                    color: Colors.blueAccent.value,
+                    title: titleController.text,
+                    details: detailsController.text,
+                    dateTime: "${DateTime.now()}",
+                  );
+                  AddNoteCubit.get(context).addNote(nosteModel);
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                   setState(() {});

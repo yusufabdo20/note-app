@@ -20,7 +20,7 @@ class NoteModelAdapter extends TypeAdapter<NoteModel> {
       color: fields[3] as int,
       title: fields[0] as String,
       details: fields[1] as String,
-      dateTime: fields[2] as DateTime,
+      dateTime: fields[2] as String,
     );
   }
 
