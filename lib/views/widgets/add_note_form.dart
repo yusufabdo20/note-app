@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:note/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:note/cubits/add_note_cubit/add_note_state.dart';
 import 'package:note/models/note_model.dart';
@@ -53,13 +54,15 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 title: "Add note",
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
                     var nosteModel = NoteModel(
                       color: Colors.blueAccent.value,
                       title: titleController.text,
                       details: detailsController.text,
-                      dateTime: "${DateTime.now()}",
+                      dateTime:
+                          "${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now())}",
                     );
+                    _formKey.currentState!.save();
+
                     AddNoteCubit.get(context).addNote(nosteModel);
                   } else {
                     autovalidateMode = AutovalidateMode.always;

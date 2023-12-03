@@ -8,20 +8,17 @@ class NotesViewBody extends StatelessWidget {
   const NotesViewBody({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NotesCubit()..readAllNotes(),
-      child: Padding(
-        padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
-        child: Column(
-          children: [
-            CustomAppBar(
-                title: "Notes", icon: Icon(Icons.search), onPressed: () {}),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
-            ),
-            NotesListViewBuilder(),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
+      child: Column(
+        children: [
+          CustomAppBar(
+              title: "Notes", icon: Icon(Icons.search), onPressed: () {}),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,
+          ),
+          NotesListViewBuilder(),
+        ],
       ),
     );
   }

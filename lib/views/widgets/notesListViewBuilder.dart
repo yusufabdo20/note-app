@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note/cubits/notes_cubit/notes_cubit.dart';
@@ -18,6 +19,7 @@ class NotesListViewBuilder extends StatelessWidget {
         return Expanded(
           child: ListView.builder(
             reverse: true,
+            dragStartBehavior: DragStartBehavior.down,
             itemCount: notes.length,
             itemBuilder: (context, index) {
               return NoteItem(

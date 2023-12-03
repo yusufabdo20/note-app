@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:note/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:note/cubits/add_note_cubit/add_note_state.dart';
+import 'package:note/cubits/notes_cubit/notes_cubit.dart';
 import 'package:note/views/widgets/add_note_form.dart';
 
 class AddNoteBottomSheet extends StatelessWidget {
@@ -20,7 +21,7 @@ class AddNoteBottomSheet extends StatelessWidget {
         child: BlocConsumer<AddNoteCubit, AddNoteStates>(
           listener: (context, state) async {
             if (state is AddNoteErrorState) {
-              log("ERRORR : ${state.error}");
+              log("ERRORR in AddNoteBottomSheet  listener : ${state.error}");
               await Fluttertoast.showToast(
                   msg: "There is Error: ${state.error}",
                   toastLength: Toast.LENGTH_LONG,
@@ -37,6 +38,8 @@ class AddNoteBottomSheet extends StatelessWidget {
                   // backgroundColor: Colors.,
                   textColor: Colors.white,
                   fontSize: 16.0);
+              BlocProvider.of<NotesCubit>(context).readAllNotes();
+
               Navigator.pop(context);
             }
           },
