@@ -12,7 +12,7 @@ class NoteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.lightGreen,
+      color: Color(noteModel.color),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -23,7 +23,7 @@ class NoteItem extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => EditNoteView(),
+                    builder: (context) => EditNoteView(noteModel: noteModel),
                   ),
                 );
               },

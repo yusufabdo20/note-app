@@ -16,40 +16,45 @@ class AddNoteBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AddNoteCubit(),
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        child: BlocConsumer<AddNoteCubit, AddNoteStates>(
-          listener: (context, state) async {
-            if (state is AddNoteErrorState) {
-              log("ERRORR in AddNoteBottomSheet  listener : ${state.error}");
-              await Fluttertoast.showToast(
-                  msg: "There is Error: ${state.error}",
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
-            }
-            if (state is AddNoteSuccessState) {
-              await Fluttertoast.showToast(
-                  msg: "Added New Note",
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  // backgroundColor: Colors.,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
-              BlocProvider.of<NotesCubit>(context).readAllNotes();
+      child: BlocConsumer<AddNoteCubit, AddNoteStates>(
+        listener: (context, state) async {
+          if (state is AddNoteErrorState) {
+            log("ERRORR in AddNoteBottomSheet  listener : ${state.error}");
+            await Fluttertoast.showToast(
+                msg: "There is Error: ${state.error}",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0);
+          }
+          if (state is AddNoteSuccessState) {
+            await Fluttertoast.showToast(
+                msg: "Added New Note",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                // backgroundColor: Colors.,
+                textColor: Colors.white,
+                fontSize: 16.0);
+            BlocProvider.of<NotesCubit>(context).readAllNotes();
 
-              Navigator.pop(context);
-            }
-          },
-          builder: (context, state) {
-            return AbsorbPointer(
+            Navigator.pop(context);
+          }
+        },
+        builder: (context, state) {
+          return Padding(
+            padding: EdgeInsets.only(
+              top: 16,
+              right: 16,
+              left: 16,
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: AbsorbPointer(
               absorbing: state is AddNoteLoadState ? true : false,
-              child: const AddNoteForm(),
-            );
-          },
-        ),
+              child: const SingleChildScrollView(child: const AddNoteForm()),
+            ),
+          );
+        },
       ),
     );
   }

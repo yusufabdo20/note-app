@@ -46,28 +46,18 @@ class _AddNoteFormState extends State<AddNoteForm> {
               detailsController.text = v!;
             },
           ),
-          const Spacer(),
+          SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [],
+              )),
           BlocBuilder<AddNoteCubit, AddNoteStates>(
             builder: (context, state) {
               return CustomButton(
                 isLoading: state is AddNoteLoadState ? true : false,
                 title: "Add note",
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    var nosteModel = NoteModel(
-                      color: Colors.blueAccent.value,
-                      title: titleController.text,
-                      details: detailsController.text,
-                      dateTime:
-                          "${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now())}",
-                    );
-                    _formKey.currentState!.save();
-
-                    AddNoteCubit.get(context).addNote(nosteModel);
-                  } else {
-                    autovalidateMode = AutovalidateMode.always;
-                    setState(() {});
-                  }
+                  checkValidation(context);
                 },
               );
             },
@@ -75,6 +65,28 @@ class _AddNoteFormState extends State<AddNoteForm> {
         ],
       ),
     );
+  }
+
+  void checkValidation(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      addNewNote(context);
+    } else {
+      autovalidateMode = AutovalidateMode.always;
+      setState(() {});
+    }
+  }
+
+  void addNewNote(BuildContext context) {
+    var nosteModel = NoteModel(
+      color: Colors.white.value,
+      title: titleController.text,
+      details: detailsController.text,
+      dateTime: "${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now())}",
+    );
+
+    AddNoteCubit.get(context).addNote(nosteModel);
   }
 }
 
@@ -91,6 +103,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

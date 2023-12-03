@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
       this.maxLines = 1,
       this.hintText,
       this.controller,
+      this.onChanged,
       this.onSaved});
   final int maxLines;
   final String labelText;
@@ -15,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final Function(String)? onSubmitted;
   final Function(String?)? onSaved;
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -36,6 +38,7 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines,
       textAlign: TextAlign.center,
       onFieldSubmitted: onSubmitted,
+      onChanged: onChanged,
     );
   }
 }

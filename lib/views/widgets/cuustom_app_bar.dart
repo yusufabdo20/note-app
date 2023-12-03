@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget {
           ),
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(5),
           ),
